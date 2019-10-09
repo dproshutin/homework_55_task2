@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import AddCost from '../components/AddCost/AddCost.js';
+const uuid = require('uuid/v1');
 
 class App extends Component {
   state = {
@@ -8,6 +9,11 @@ class App extends Component {
     currentCost: {}
   };
 
+  typeItem = (event) => {
+    const currentCost = {...this.state.currentCost};
+    currentCost.item = event.target.value;
+    this.setState({currentCost});
+  };
   typePrice = (event) => {
     const re = /^[0-9\b]+$/;
 
@@ -17,16 +23,30 @@ class App extends Component {
       this.setState({currentCost});
     }
   };
+  addCost = (event) => {
+    event.preventDefault();
+    const costs = [...this.state.costs];
+    let currentCost = {item: this.state.currentCost.item, cost: this.state.currentCost.cost, id: uuid()};
+    costs.push(currentCost);
+
+    currentCost = {item: '', cost: ''};
+    this.setState({costs, currentCost});
+
+    // console.log(currentCost);
+
+  };
   render() {
+    console.log(this.state.costs);
+    console.log(this.state.currentCost);
     return (
         <div className="App">
           <AddCost
-              change={(e) => this.typePrice(e)}
-              // click={}
+              changeItem={(e) => this.typeItem(e)}
+              changePrice={(e) => this.typePrice(e)}
+              click={(e) => this.addCost(e)}
               item={this.state.currentCost.item}
               cost={this.state.currentCost.cost}
-          >
-          </AddCost>
+          />
         </div>
     );
   }
