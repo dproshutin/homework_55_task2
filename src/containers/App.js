@@ -37,6 +37,12 @@ class App extends Component {
         // console.log(currentCost);
 
     };
+    removeCost = (id) => {
+        const costs = [...this.state.costs];
+        const index = costs.findIndex(item => id === item.id);
+        costs.splice(index, 1);
+        this.setState({costs});
+    };
 
     render() {
         console.log(this.state.costs);
@@ -61,6 +67,7 @@ class App extends Component {
                                             key={cost.id}
                                             item={cost.item}
                                             cost={cost.cost}
+                                            remove={() => this.removeCost(cost.id)}
                                         />
                                     );
                                 })

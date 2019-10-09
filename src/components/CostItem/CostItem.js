@@ -7,7 +7,7 @@ const CostItem = props => {
             <span>{props.item}</span>
             <span>{props.cost}</span>
             <span>KZT</span>
-            <button>Delete</button>
+            <button onClick={props.remove}>Delete</button>
         </div>
     );
 };
