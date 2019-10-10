@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import './App.css';
 import AddCost from '../components/AddCost/AddCost';
 import CostItem from '../components/CostItem/CostItem';
+import TotalCost from '../components/TotalCost/TotalCost';
 
 const uuid = require('uuid/v1');
 
 class App extends Component {
     state = {
         costs: [],
-        currentCost: {}
+        currentCost: {},
+        total: 0
     };
 
     typeItem = (event) => {
@@ -31,8 +33,9 @@ class App extends Component {
         const costs = [...this.state.costs];
         let currentCost = {item: this.state.currentCost.item, cost: this.state.currentCost.cost, id: uuid()};
         costs.push(currentCost);
+        let total = this.state.total + parseFloat(currentCost.cost);
         currentCost = {item: '', cost: ''};
-        this.setState({costs, currentCost});
+        this.setState({costs, currentCost, total});
 
         // console.log(currentCost);
 
@@ -40,8 +43,10 @@ class App extends Component {
     removeCost = (id) => {
         const costs = [...this.state.costs];
         const index = costs.findIndex(item => id === item.id);
-        costs.splice(index, 1);
-        this.setState({costs});
+        const costRemoved = costs.splice(index, 1);
+        let total = this.state.total - parseFloat(costRemoved.cost);
+        console.log(total);
+        this.setState({costs, total});
     };
 
     render() {
@@ -74,6 +79,9 @@ class App extends Component {
                             }
                         </div> : null
                 }
+                <TotalCost
+                    total={this.state.total}
+                />
 
             </div>
 
