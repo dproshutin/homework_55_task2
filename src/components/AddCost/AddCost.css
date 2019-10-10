@@ -1,3 +1,14 @@
 .AddCost {
     margin-top: 30px;
 }
+.AddCost span {
+    margin-right: 30px;
+}
+.ItemDescription {
+    margin-right: 30px;
+    width: 40%;
+}
+.ItemPrice {
+    margin-right: 10px;
+    width: 10%;
+}

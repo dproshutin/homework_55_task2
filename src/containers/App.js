@@ -64,7 +64,7 @@ class App extends Component {
 
                 {
                     (this.state.costs.length !== 0) ?
-                        <div>
+                        <div className="CostsList">
                             {
                                 this.state.costs.map(cost => {
                                     return (

@@ -3,9 +3,9 @@ import './CostItem.css';
 
 const CostItem = props => {
     return (
-        <div>
+        <div className="CostsListItem">
             <span>{props.item}</span>
-            <span>{props.cost}</span>
+            <span className="CostsListItemPrice">{props.cost}</span>
             <span>KZT</span>
             <button onClick={props.remove}>Delete</button>
         </div>
